@@ -75,6 +75,7 @@ object GuildStore : StoreStruct<GuildData>(
         soundboardVolume: Int
     ): GuildData = withData {
         val index = data.indexOfFirst { it.guildId == guildId }
+        val clampedSoundboardVolume = soundboardVolume.coerceIn(0, 100)
 
         val guildData = if (index != -1) {
             data[index].apply {
@@ -82,10 +83,10 @@ object GuildStore : StoreStruct<GuildData>(
                 this.prefix = prefix
                 this.voice = voice
                 this.autoJoin = autoJoin
-                this.soundboardVolume = soundboardVolume
+                this.soundboardVolume = clampedSoundboardVolume
             }
         } else {
-            GuildData(guildId, channelId, prefix, voice, autoJoin, soundboardVolume).also { data.add(it) }
+            GuildData(guildId, channelId, prefix, voice, autoJoin, clampedSoundboardVolume).also { data.add(it) }
         }
 
         writeLocked()

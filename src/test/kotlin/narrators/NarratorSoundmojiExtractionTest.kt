@@ -95,13 +95,7 @@ class NarratorSoundmojiExtractionTest : FunSpec({
             SoundmojiContext(Snowflake(123456789012345678))
         )
 
-        val method = Narrator::class.java.getDeclaredMethod(
-            "filterDisabledSoundmoji",
-            MutableList::class.java,
-            Int::class.java
-        )
-        method.isAccessible = true
-        method.invoke(narrator, contexts, 0)
+        narrator.filterDisabledSoundmoji(contexts, 0)
 
         contexts shouldBe listOf(VoiceTextContext(voice, "hello"))
     }
@@ -117,13 +111,7 @@ class NarratorSoundmojiExtractionTest : FunSpec({
             SoundmojiContext(Snowflake(123456789012345678))
         )
 
-        val method = Narrator::class.java.getDeclaredMethod(
-            "filterDisabledSoundmoji",
-            MutableList::class.java,
-            Int::class.java
-        )
-        method.isAccessible = true
-        method.invoke(narrator, contexts, 50)
+        narrator.filterDisabledSoundmoji(contexts, 50)
 
         contexts shouldBe listOf(
             VoiceTextContext(voice, "hello"),

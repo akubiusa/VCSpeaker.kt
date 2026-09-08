@@ -227,7 +227,7 @@ class Narrator @OptIn(KordVoice::class) constructor(
 
     private val soundRegex = Regex("<sound:\\d+:(\\d+)>")
 
-    private fun filterDisabledSoundmoji(contexts: MutableList<ProviderContext>, soundboardVolume: Int) {
+    internal fun filterDisabledSoundmoji(contexts: MutableList<ProviderContext>, soundboardVolume: Int) {
         if (soundboardVolume <= 0) contexts.removeAll { it is SoundmojiContext }
     }
 }
